@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hot"
+    app:startDestination="@id/hotFragment">
+
+    <fragment
+        android:id="@+id/hotFragment"
+        android:name="com.rightcode.baseproject.ui.main.hot.HotFragment"
+        tools:layout="@layout/fragment_hot"
+        android:label="HotFragment" />
+</navigation>

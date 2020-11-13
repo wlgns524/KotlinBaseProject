@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+        <attr name="toolbarTitle" format="string" />
+        <attr name="toolbarBack" format="boolean" />
+        <attr name="toolbarSearch" format="boolean" />
+        <attr name="toolbarCart" format="boolean" />
+        <attr name="toolbarCartNoti" format="integer" />
+        <attr name="toolbarSetting" format="boolean" />
+        <attr name="toolbarSettingNoti" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">BaseProject</string>
+
+
+    <!-- 국가 -->
+    <string name="country">국가</string>
+    <string name="korea">한국</string>
+    <string name="china">중국</string>
+    <string name="usa">미국</string>
+    <string name="singapore">싱가포르</string>
+    <string name="country_code">국가코드</string>
+    <string name="phone_code_kr">한국(+82)</string>
+    <string name="phone_code_cn">중국(+86)</string>
+    <string name="phone_code_us">미국(+1)</string>
+    <string name="phone_code_sg">싱가포르(+65)</string>
+
+    <string name="common_error">잠시 후 다시 시도해주세요</string>
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+</resources>
