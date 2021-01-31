@@ -16,6 +16,7 @@ class HomeViewModel @ViewModelInject constructor(
     private val localRepository: LocalRepository
 ) : BaseViewModel() {
 
+    lateinit var actionInterface: ActionInterface
     private val _getUsers: MutableLiveData<List<User>> = MutableLiveData()
     val getUser: LiveData<List<User>>
         get() = _getUsers
@@ -32,4 +33,9 @@ class HomeViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    fun goToGallery(){
+        actionInterface.goToGallery()
+    }
+
 }

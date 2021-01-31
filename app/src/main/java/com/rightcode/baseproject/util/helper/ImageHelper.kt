@@ -40,7 +40,7 @@ object ImageHelper {
     fun singleListFromPath(id: Long, path: String): ArrayList<Image> {
         val images = arrayListOf<Image>()
         val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-        images.add(Image(id, getNameFromFilePath(path), uri, path))
+        images.add(Image(id, getNameFromFilePath(path), uri))
         return images
     }
 
@@ -63,11 +63,10 @@ object ImageHelper {
     }
 
     fun findImageIndex(image: Image, images: ArrayList<Image>): Int {
-        for (i in images.indices) {
-            if (images[i].path == image.path) {
-                return i
+        if (!images.isNullOrEmpty())
+            images.forEachIndexed { index, item ->
+                return if (item.uri == image.uri) index else -1
             }
-        }
         return -1
     }
 
@@ -75,7 +74,7 @@ object ImageHelper {
         val indexes = arrayListOf<Int>()
         for (image in subImages) {
             for (i in images.indices) {
-                if (images[i].path == image.path) {
+                if (images[i].uri == image.uri) {
                     indexes.add(i)
                     break
                 }
@@ -86,7 +85,7 @@ object ImageHelper {
 
 
     fun isGifFormat(image: Image): Boolean {
-        val extension = image.path.substring(image.path.lastIndexOf(".") + 1, image.path.length)
+        val extension = image.uri.toString().substring(image.uri.toString().lastIndexOf(".") + 1, image.uri.toString().length)
         return extension.equals("gif", ignoreCase = true)
     }
 }

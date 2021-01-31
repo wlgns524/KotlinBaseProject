@@ -51,7 +51,6 @@ class HotFragment : BaseFragment<HotViewModel, FragmentHotBinding>() {
         return R.layout.fragment_hot
     }
 
-
     override fun getDataViewBinding(): FragmentHotBinding =
         FragmentHotBinding.inflate(layoutInflater)
 

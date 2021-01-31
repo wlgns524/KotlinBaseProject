@@ -4,6 +4,7 @@
 
 
     <data>
+
         <variable
             name="viewModel"
             type="com.rightcode.baseproject.ui.main.home.HomeViewModel" />
@@ -13,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:onClick="@{()->viewModel.goToGallery()}"
             android:text="home"
             android:textSize="50dp"
             app:layout_constraintBottom_toBottomOf="parent"

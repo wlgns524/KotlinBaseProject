@@ -26,7 +26,7 @@ class LoadingDialog(context: Context, cancel: Boolean) :
             ), PorterDuff.Mode.SRC_ATOP
         )
         if (cancel) {
-            binding.dialogBackground.setOnClickListener { v: View? -> dismiss() }
+            binding.dialogBackground.setOnClickListener { dismiss() }
         } else {
             binding.dialogBackground.setOnClickListener(null)
         }

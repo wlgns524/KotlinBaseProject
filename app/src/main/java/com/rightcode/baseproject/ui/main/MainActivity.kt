@@ -1,5 +1,6 @@
 package com.rightcode.baseproject.ui.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -13,8 +14,10 @@ import com.rightcode.baseproject.R
 import com.rightcode.baseproject.databinding.ActivityMainBinding
 import com.rightcode.baseproject.ui.component.CustomToolbar
 import com.rightcode.baseproject.ui.component.imagePicker.ImagePickerActivity
+import com.rightcode.baseproject.ui.component.imagePicker.model.Image
 import com.rightcode.baseproject.ui.component.imagePicker.model.ImagePickerConfig
 import com.rightcode.baseproject.ui.component.imagePicker.model.ImagePickerConfig.Companion.EXTRA_CONFIG
+import com.rightcode.baseproject.util.extension.LogD
 import com.rightcode.baseproject.util.extension.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,9 +37,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
 
 
-        val intent = Intent(this, ImagePickerActivity::class.java)
-        intent.putExtra(EXTRA_CONFIG, ImagePickerConfig(true,true,true,true))
-        startActivity(intent)
     }
 
     override fun initialize() {

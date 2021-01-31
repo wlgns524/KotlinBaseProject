@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <com.rightcode.baseproject.ui.component.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="image"
+            type="com.rightcode.baseproject.ui.component.imagePicker.model.Image" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="viewModel"
+            type="com.rightcode.baseproject.ui.component.imagePicker.ImagePickerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{() -> viewModel.setSelectImage(position, image)}"
+            android:src="@{image.uri}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|right"
-            android:layout_margin="2dp"
-            android:background="@drawable/shape_oval_solid_0aa2e8_stroke_ffffff_26dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/color_0aa2e8"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:background="@drawable/shape_oval_solid_0aa2e8_stroke_ffffff_26dp"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:visibility="gone"/>
-    </com.rightcode.baseproject.ui.component.SquareFrameLayout>
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/layer_check_0aa2e8"
+            android:visibility="@{image.selected}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

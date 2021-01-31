@@ -16,6 +16,7 @@ object Features {
 
     val CONNECT_COUNTRY: EnumModel.Country? = null
     val SERVICE_COUNTRY: EnumModel.Country? = null
+
     const val TEST_ONLY = true
 
     /**
@@ -28,14 +29,13 @@ object Features {
      */
     const val SHOW_NETWORK_LOG = true
 
-    fun getServer(context: Context): ConnectServer? {
+    fun getServer(context: Context): ConnectServer {
         val name: String? = PreferenceHelper.getInstance(context)
             ?.get(PreferenceHelper.PreferenceKey.ConnectServer, ConnectServer.REAL.name)
         val server: ConnectServer
         server = try {
             ConnectServer.valueOf(name!!)
         } catch (e: Exception) {
-//            Log.e(e)
             ConnectServer.REAL
         }
         LogD(server.name)

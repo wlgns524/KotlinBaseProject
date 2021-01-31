@@ -12,7 +12,7 @@ import com.rightcode.baseproject.Features
  * - e : 오류를 일으킨 문제
  */
 
-const val TAG = "Tag"
+const val TAG = "LogTag"
 
 
 fun LogV(message: String) {
@@ -113,7 +113,7 @@ private fun buildMessage(format: String?, vararg message: Any): String {
     sb.append(" ")
     sb.append(stackTraceElement.lineNumber)
     if (format == null || format.isEmpty()) {
-        if (message == null || message.size <= 0) {
+        if (message == null || message.isEmpty()) {
             sb.append("] >> ")
             sb.append(stackTraceElement.methodName)
         } else if (message.size > 1) {
@@ -123,7 +123,8 @@ private fun buildMessage(format: String?, vararg message: Any): String {
             sb.append("] ")
             sb.append(message[0])
         }
-    } else if (message == null || message.size <= 0) {
+    } else if (message == null || message.isEmpty()) {
+        sb.append("] ")
         sb.append(format)
     } else {
         sb.append("] ")

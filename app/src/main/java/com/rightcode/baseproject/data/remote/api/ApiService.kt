@@ -12,6 +12,11 @@ interface ApiService {
     ): Response<TryList>
 
     companion object {
-        const val BASE_URL = "http://qa-rest.08liter.com"
+        const val COM_REAL_DOMAIN = "http://3.34.82.210:5050"
+        const val COM_QA_DOMAIN = "http://qa-rest.08liter.com"
     }
+
+//    companion object {
+//        const val BASE_URL = "http://qa-rest.08liter.com"
+//    }
 }

@@ -2,8 +2,6 @@ package com.rightcode.baseproject.util.helper
 
 import android.app.Activity
 import android.content.Context
-import android.preference.PreferenceManager
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
@@ -11,10 +9,11 @@ open class PreferenceHelper constructor(
     private val mContext: Context
 ) {
 
-    private val mPackageName: String
+    private val mPackageName: String = mContext.packageName
 
     enum class PreferenceKey {
-        ConnectServer
+        ConnectServer,
+        Token
     }
 
 
@@ -141,7 +140,4 @@ open class PreferenceHelper constructor(
         }
     }
 
-    init {
-        mPackageName = mContext.packageName
-    }
 }

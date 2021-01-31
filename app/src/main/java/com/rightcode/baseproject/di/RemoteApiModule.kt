@@ -1,8 +1,11 @@
 package com.rightcode.baseproject.di
 
+import android.app.Application
 import android.os.Build
+import android.text.TextUtils
 import com.rightcode.baseproject.Features
 import com.rightcode.baseproject.data.remote.api.ApiService
+import com.rightcode.baseproject.util.helper.PreferenceHelper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -25,17 +28,16 @@ object RemoteApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitService(): ApiService = Retrofit.Builder()
-        .baseUrl(ApiService.BASE_URL)
+    fun provideRetrofitService(application: Application): ApiService = Retrofit.Builder()
+        .baseUrl(getDomain(Features.getServer(application)))
         .addConverterFactory(
             MoshiConverterFactory.create(
                 Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             )
         )
-        .client(providesOkHttpClient(providesLoggingInterceptor(), providesOkhttpInterceptor()))
+        .client(providesOkHttpClient(providesLoggingInterceptor(), providesOkhttpInterceptor(application)))
         .build()
         .create(ApiService::class.java)
-
 
     @Provides
     @Singleton
@@ -46,10 +48,9 @@ object RemoteApiModule {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
     }
 
-
     @Provides
     @Singleton
-    fun providesOkhttpInterceptor(): Interceptor {
+    fun providesOkhttpInterceptor(application: Application): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             val original: Request = chain.request()
             val requestBuilder: Request.Builder = original.newBuilder()
@@ -58,6 +59,10 @@ object RemoteApiModule {
                 .addHeader("X-08liter-os-version", Build.VERSION.RELEASE)
                 .addHeader("X-08liter-model", Build.MODEL)
                 .addHeader("X-08liter-platform", "Android")
+                val serviceToken = PreferenceHelper.getInstance(application)?.get(PreferenceHelper.PreferenceKey.Token,"")
+                if(!TextUtils.isEmpty(serviceToken)){
+                    requestBuilder.addHeader("authorization", "bearer $serviceToken")
+                }
             val request: Request = requestBuilder.build()
             chain.proceed(request)
         }
@@ -80,4 +85,11 @@ object RemoteApiModule {
             .build()
     }
 
+    private fun getDomain(server: Features.ConnectServer): String {
+        return if (server.equals(Features.ConnectServer.QA)) {
+            ApiService.COM_QA_DOMAIN
+        } else {
+            ApiService.COM_REAL_DOMAIN
+        }
+    }
 }

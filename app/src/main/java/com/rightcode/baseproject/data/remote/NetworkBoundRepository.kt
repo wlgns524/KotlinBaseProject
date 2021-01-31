@@ -18,15 +18,14 @@ abstract class NetworkBoundRepository<RESULT> {
         // Fetch latest posts from remote
         val apiResponse = fetchFromRemote()
 
-        val remoteResult = apiResponse
-        println("NetworkBoundRepository 23 - User : ${remoteResult}")
-        println("NetworkBoundRepository 23 - User : ${remoteResult?.body()}")
+        println("NetworkBoundRepository 23 - User : $apiResponse")
+        println("NetworkBoundRepository 23 - User : ${apiResponse?.body()}")
         // Check for response validation
-        if (remoteResult?.isSuccessful!! && remoteResult.body() != null) {
-            emit(State.success<RESULT>(remoteResult.body()!!))
+        if (apiResponse.isSuccessful && apiResponse.body() != null) {
+            emit(State.success<RESULT>(apiResponse.body()!!))
         } else {
             // Something went wrong! Emit Error state.
-            emit(State.error(remoteResult.message()))
+            emit(State.error(apiResponse.message()))
         }
     }.catch { e ->
         println("NetworkBoundRepository 32 - User : ${e.message}")
